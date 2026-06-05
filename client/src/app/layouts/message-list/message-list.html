@@ -1,1 +1,11 @@
-<p>message-list works!</p>
+<section class="flex flex-col gap-4">
+  @if (channelService.isLoadingMessages()) {
+    <div class="flex justify-center p-8">
+      <span class="loading loading-spinner loading-lg text-indigo-500"></span>
+    </div>
+  }
+
+  @for (message of channelService.messages(); track message.id) {
+    <app-message-item [message]="message"></app-message-item>
+  }
+</section>

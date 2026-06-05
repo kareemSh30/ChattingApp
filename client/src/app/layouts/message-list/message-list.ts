@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ChannelService } from '../../services/channel.service';
+import { MessageItemComponent } from '../message-item/message-item';
 
 @Component({
   selector: 'app-message-list',
-  imports: [],
+  standalone: true,
+  imports: [MessageItemComponent],
   templateUrl: './message-list.html',
-  styleUrl: './message-list.css',
 })
-export class MessageList {}
+export class MessageList {
+  channelService = inject(ChannelService);
+}

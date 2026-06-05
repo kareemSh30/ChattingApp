@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+// src/app/features/main-chat/chat-header/chat-header.component.ts
+import { Component, inject } from '@angular/core';
+import { ChannelService } from '../../services/channel.service';
 
 @Component({
   selector: 'app-chat-header',
-  imports: [],
+  standalone: true,
   templateUrl: './chat-header.html',
-  styleUrl: './chat-header.css',
 })
-export class ChatHeader {}
+export class ChatHeaderComponent {
+  channelService = inject(ChannelService);
+}
