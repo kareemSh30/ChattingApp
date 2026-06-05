@@ -11,7 +11,7 @@
       <!-- Username -->
       <div class="mb-3">
         <input
-          [(ngModel)]="model.username"
+          [(ngModel)]="username"
           id="username"
           name="username"
           type="text"
@@ -24,7 +24,7 @@
       <!-- Email -->
       <div class="mb-3">
         <input
-          [(ngModel)]="model.email"
+          [(ngModel)]="email"
           id="email"
           name="email"
           type="email"
@@ -38,7 +38,7 @@
       <!-- Password -->
       <div class="mb-3 relative">
         <input
-          [(ngModel)]="model.password"
+          [(ngModel)]="password"
           id="password"
           name="password"
           type="password"
@@ -56,10 +56,7 @@
         </span>
       </div>
 
-      <!-- Error -->
-      @if (errorMessage) {
-        <p class="mb-4 text-sm text-red-500 text-center">{{ errorMessage }}</p>
-      }
+
 
       <!-- Submit -->
       <button

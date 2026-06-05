@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AccountService } from '../../services/account-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -12,17 +13,21 @@ import { AccountService } from '../../services/account-service';
 export class Register {
   private accountService = inject(AccountService);
   private router = inject(Router);
-  model: any = {};
-  errorMessage = '';
+  private toastr = inject(ToastrService);
+
+  username = signal('');
+  email = signal('');
+  password = signal('');
 
   register() {
-    this.accountService.register(this.model).subscribe({
+    const model = { username: this.username(), email: this.email(), password: this.password() };
+    this.accountService.register(model).subscribe({
       next: (response) => {
-        console.log(response);
-        this.router.navigate(['/']);
+        this.toastr.success('Registration successful');
+        this.router.navigate(['/login']);
       },
       error: (error) => {
-        this.errorMessage = error.error || 'Registration failed';
+        this.toastr.error(error.error || 'Registration failed');
       }
     });
   }

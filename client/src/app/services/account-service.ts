@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
-import { Iusers } from '../interfaces/Iusers';
+import { Ilogin, Iregister, Iusers } from '../interfaces/Iusers';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Iusers } from '../interfaces/Iusers';
 export class AccountService {
   private http = inject(HttpClient);
   private baseUrl = 'http://localhost:5001/api/';
+  private router = inject(Router);
 
   currentUser = signal<Iusers | null>(null);
 
@@ -19,7 +21,7 @@ export class AccountService {
     }
   }
 
-  login(creds: any) {
+  login(creds: Ilogin) {
     return this.http.post<Iusers>(this.baseUrl + 'account/login', creds).pipe(
       tap((user => {
         if (user) {
@@ -30,7 +32,7 @@ export class AccountService {
     );
   }
 
-  register(model: any) {
+  register(model: Iregister) {
     return this.http.post<Iusers>(this.baseUrl + 'account/register', model).pipe(
       tap((user => {
         if (user) {
@@ -44,5 +46,6 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
+    this.router.navigate(['/']);
   }
 }

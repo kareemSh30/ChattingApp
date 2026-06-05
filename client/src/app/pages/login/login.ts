@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AccountService } from '../../services/account-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,19 @@ import { AccountService } from '../../services/account-service';
 export class Login {
   private accountService = inject(AccountService);
   private router = inject(Router);
-  creds: any = {};
-  errorMessage = '';
+  private toastr = inject(ToastrService);
+
+  email = signal('');
+  password = signal('');
 
   login() {
-    this.accountService.login(this.creds).subscribe({
-      next: (response) => {
-        console.log(response);
+     this.accountService.login({ email: this.email(), password: this.password() }).subscribe({
+      next: () => {
+        this.toastr.success('Login successful');
         this.router.navigate(['/main-chat']);
       },
-      error: (error) => {
-        this.errorMessage = error.error || 'Invalid email or password';
+      error: (err) => {
+        this.toastr.error(err.error || 'Login failed');
       }
     });
   }

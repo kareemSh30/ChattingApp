@@ -3,7 +3,7 @@ export interface Iusers {
     username: string;
     email: string;
     token: string;
-    imageUrl?:string;
+    photoUrl?:string;
 }
 
 export interface Ilogin {
