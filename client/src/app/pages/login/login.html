@@ -1,0 +1,71 @@
+<section class="min-h-screen bg-slate-950 text-white flex items-center justify-center px-4">
+  <div class="w-full max-w-sm bg-slate-700 rounded-2xl shadow-md px-8 py-10">
+
+    <!-- Heading -->
+    <h1 class="text-2xl font-bold text-white text-center mb-1">Sign In</h1>
+    <p class="text-sm text-white text-center mb-7">Enter your credentials to access your account</p>
+
+    <!-- Form -->
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+
+      <!-- Email -->
+      <div class="mb-3">
+        <input
+          [(ngModel)]="creds.email"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email Address"
+          autocomplete="email"
+          required
+          class="w-full h-11 px-4 text-sm text-gray-800 bg-white border border-gray-200 rounded-lg placeholder-gray-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 relative">
+        <input
+          [(ngModel)]="creds['password']"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+          class="w-full h-11 px-4 pr-10 text-sm text-gray-800 bg-white border border-gray-200 rounded-lg placeholder-gray-400 focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 transition"
+        />
+       
+      </div>
+
+      <!-- Remember me + Forgot password -->
+      <div class="flex items-center justify-between mb-5">
+        <label class="flex items-center gap-2 cursor-pointer text-sm text-gray-600">
+          <input type="checkbox" name="rememberMe" class="w-4 h-4 rounded cursor-pointer accent-indigo-500" />
+          Remember me
+        </label>
+        <a href="#" class="text-sm text-indigo-500 hover:text-indigo-600 font-medium">Forgot password?</a>
+      </div>
+
+      <!-- Error -->
+      @if (errorMessage) {
+        <p class="mb-4 text-sm text-red-500 text-center">{{ errorMessage }}</p>
+      }
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full h-11 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-sm rounded-lg transition active:scale-95"
+      >
+        Sign In
+      </button>
+
+    </form>
+
+    <!-- Sign up -->
+    <p class="mt-6 text-sm text-gray-500 text-center">
+      Don't have an account?
+      <a routerLink="/register" class="text-indigo-500 font-medium hover:text-indigo-600">Create one</a>
+    </p>
+
+  </div>
+</section>

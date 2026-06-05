@@ -1,0 +1,137 @@
+<aside>
+
+    <div>
+      Angular Community
+    </div>
+
+    <div class="channels-area">
+
+      <p class="channel-category">
+        Text Channels
+      </p>
+
+      <div class="channel-item channel-item--active">
+        <span class="channel-hash">#</span> general
+      </div>
+
+      <div class="channel-item">
+        <span class="channel-hash">#</span> angular-help
+      </div>
+
+      <div class="channel-item">
+        <span class="channel-hash">#</span> dotnet
+      </div>
+
+    </div>
+
+    <!-- User Panel -->
+  @if (accountService.currentUser()) {
+
+    <div class="user-panel">
+
+      <div class="dropdown dropdown-top w-full">
+
+        <!-- User Info -->
+        <div
+          tabindex="0"
+          role="button"
+          class="flex w-full cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-slate-800 transition">
+
+          <!-- Avatar -->
+          <div class="avatar">
+            <div
+              class="w-10 rounded-full ring ring-indigo-500 ring-offset-base-100 ring-offset-2">
+
+              <img
+                [src]="accountService.currentUser()?.imageUrl"
+                alt="Profile" />
+
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="flex flex-col text-left">
+
+            <span class="font-medium text-white">
+              {{ accountService.currentUser()?.username }}
+            </span>
+
+            <span class="text-xs text-slate-400">
+              Online
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- Dropdown Menu -->
+        <ul
+          tabindex="0"
+          class="menu menu-sm dropdown-content z-50 mb-2 w-56 rounded-xl border border-slate-700 bg-slate-900 p-2 shadow-xl">
+
+          <!-- User Header -->
+          <li class="menu-title">
+
+            <div class="flex items-center gap-3 py-2">
+
+              <img
+                [src]="accountService.currentUser()?.imageUrl"
+                alt="Profile"
+                class="h-10 w-10 rounded-full" />
+
+              <div>
+
+                <p class="text-sm font-semibold text-white">
+                  {{ accountService.currentUser()?.username }}
+                </p>
+
+                <p class="text-xs text-slate-400">
+                  {{ accountService.currentUser()?.email }}
+                </p>
+
+              </div>
+
+            </div>
+
+          </li>
+
+          <li class="divider my-1"></li>
+
+          <!-- Edit Profile -->
+          <li>
+            <button
+              class="text-slate-300 hover:text-white">
+              Edit Profile
+            </button>
+          </li>
+
+          <!-- Settings -->
+          <li>
+            <button
+              class="text-slate-300 hover:text-white">
+              Settings
+            </button>
+          </li>
+
+          <li class="divider my-1"></li>
+
+          <!-- Logout -->
+          <li>
+            <button
+              (click)="logout()"
+              class="text-red-400 hover:text-red-300">
+
+              Logout
+
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    }
+
+  </aside>
